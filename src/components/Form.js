@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-// import SearchPreview from './SearchPreview';
 
 
 class Form extends React.Component {
@@ -13,7 +12,6 @@ class Form extends React.Component {
         .then(response => {
           for (let i = 0; i < response.data.data.length; i++) {
             if (response.data.data[i].locationName == this.state.locationName) {
-              console.log(true);
               this.props.onSubmit((response.data.data[i].locationName));
 
             }
@@ -23,7 +21,6 @@ class Form extends React.Component {
   }
 
   render() {
-    console.log(this.state.data.locationName);
     return (
         <form onSubmit={this.onFormSubmit}>
           <input type="text"

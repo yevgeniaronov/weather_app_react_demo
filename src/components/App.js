@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Header from './Header';
 import DataPreview from './DataPreview';
-// import SearchPreview from './SearchPreview';
 
 import Form from './Form';
 
@@ -21,7 +20,6 @@ class App extends React.Component {
           });
         })
         .catch(console.error);
-    console.log(this.state.data);
 
   }
 
@@ -30,12 +28,10 @@ class App extends React.Component {
   }
 
   findLocation = (loc) => {
-    console.log(loc);
+    const city = this.state.data.filter((city) => city.locationName === loc);
     this.setState(prevState => ({
-      data: prevState.data.concat(loc)
+      data: prevState.data.concat(city)
     }));
-    console.log(this.data);
-    console.log(this.state.data);
   };
 
   render() {
@@ -43,12 +39,11 @@ class App extends React.Component {
         <div className="App main clearfix">
           <Header message={this.state.pageHeader}/>
           <div>
-            {this.state.data.map(data =>
-                <DataPreview {...data} key={ data.locationName }/>
+            {this.state.data.map((data, index) =>
+                <DataPreview {...data} key={ index }/>
             )}
           </div>
           <hr/>
-          {/*<SearchPreview searchResults={this.state.data}/>*/}
           <Form onSubmit={this.findLocation}/>
 
         </div>
